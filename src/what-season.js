@@ -19,9 +19,8 @@ function getSeason(date) {
   throw new Error("Invalid date!");
  }
 
-//  if(Date.parse(вфеу)) throw new Error('Invalid date!');
 
- console.log("date", date);
+//  console.log("date", date);
 
  let month = date.getMonth();
 

@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 /**
  * In the popular Minesweeper game you have a board with some mines and those cells
@@ -23,11 +23,79 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+ const columnCount = matrix[0].length;
+
+ const checkCountOfMines = (row, col) => {
+  let count = 0;
+  // first element
+  if (
+   matrix[row - 1] &&
+   matrix[row - 1][col - 1] !== undefined &&
+   matrix[row - 1][col - 1] === true
+  ) {
+   ++count;
+  }
+  if (
+   matrix[row - 1] &&
+   matrix[row - 1][col] !== undefined &&
+   matrix[row - 1][col] === true
+  ) {
+   ++count;
+  }
+  if (
+   matrix[row - 1] &&
+   matrix[row - 1][col + 1] !== undefined &&
+   matrix[row - 1][col + 1] === true
+  ) {
+   ++count;
+  }
+  if (matrix[row][col - 1] !== undefined && matrix[row][col - 1] === true) {
+   ++count;
+  }
+  if (matrix[row][col + 1] !== undefined && matrix[row][col + 1] === true) {
+   ++count;
+  }
+  if (
+   matrix[row + 1] &&
+   matrix[row + 1][col - 1] !== undefined &&
+   matrix[row + 1][col - 1] === true
+  ) {
+   ++count;
+  }
+  if (
+   matrix[row + 1] &&
+   matrix[row + 1][col] !== undefined &&
+   matrix[row + 1][col] === true
+  ) {
+   ++count;
+  }
+  if (
+   matrix[row + 1] &&
+   matrix[row + 1][col + 1] !== undefined &&
+   matrix[row + 1][col + 1] === true
+  ) {
+   ++count;
+  }
+  return count;
+ };
+
+ const resultMatrix = [];
+ let tempRow;
+ let countOfMines;
+
+ for (let i = 0; i < matrix.length; i++) {
+  tempRow = [];
+  for (let j = 0; j < columnCount; j++) {
+   countOfMines = checkCountOfMines(i, j);
+   tempRow.push(countOfMines);
+  }
+  resultMatrix.push(tempRow);
+ }
+
+ return resultMatrix;
 }
 
 module.exports = {
-  minesweeper
+ minesweeper,
 };
